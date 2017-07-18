@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mapper.BookMapper">
+    <insert id="insert" parameterType="BookVO">
+        INSERT INTO books(TITLE,PUBLISHER,PRICE,YEAR)
+        VALUES(#{bookTitle}, #{bookPub}, #{bookPrice}, #{pubYear})
+    </insert>
+     
+    <select id="selectOne" resultMap="yyj">
+        SELECT BOOK_NUM,TITLE,PUBLISHER,PRICE,YEAR 
+        FROM books
+        WHERE BOOK_NUM=#{bookNum} 
+    </select>
+     
+    <select id="selectAll" resultMap="yyj">
+        SELECT BOOK_NUM,TITLE,PUBLISHER,PRICE,YEAR 
+        FROM books
+    </select>
+    
+    <update id="update" parameterType="BookVO">
+    	UPDATE books SET TITLE=#{bookTitle}, PUBLISHER=#{bookPub},
+    	PRICE=#{bookPrice}, YEAR=#{pubYear} where BOOK_NUM=#{bookNum}
+    </update>
+    
+    <delete id="delete" parameterType="BookVO">
+    	DELETE FROM books WHERE BOOK_NUM=#{bookNum}
+    </delete>
+     
+    <resultMap type="BookVO" id="yyj">
+        <result column="BOOK_NUM" property="bookNum"/>
+        <result column="TITLE" property="bookTitle"/>
+        <result column="PUBLISHER" property="bookPub"/>
+        <result column="PRICE" property="bookPrice"/>
+        <result column="YEAR" property="pubYear"/>
+    </resultMap>
+</mapper>
