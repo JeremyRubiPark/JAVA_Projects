@@ -42,11 +42,32 @@ def main():
 
             c.send('Thank you for connecting')
 
-
+            #initial_speed
+            speed = 0
             while True:
                 result_str = c.recv(1024)
+
                 if len(result_str) != 0:
-                    print result_str
+                    angle = int(result_str)
+                    print angle
+                    speed = 1.8 * abs(angle)
+                    if 0<angle<=180:
+                        #left rotation
+                        #car turns left
+                        #default speed
+                        speed = 50
+                        pass
+                    elif -180<=angle<0:
+                        #right rotation
+                        #car turns right
+                        #default speed
+                        speed = 50
+                        pass
+                    else:
+                        #stop
+                        speed = 0
+                        pass
+                         
             # direction = c.recv(1024)
             # direction = int(direction)
             # time.sleep(1)
